@@ -1,37 +1,283 @@
 const navLinks = document.getElementById('nav-links').children;
 
 const shiftSelectDiv = document.getElementById('preferred');
-const overlayDiv = document.getElementById('overlay');
+const selectDiv = document.getElementById('select-period');
 const menuDiv = document.getElementById('menu');
 const mainDiv = document.getElementById('main');
 
-const nameSelectDiv = document.getElementById('signin');
-const nameSelectForm = document.getElementById('name-select');
-const nameSelectBox = document.getElementById('name');
-const nameSelectSubmit = document.getElementById('name-submit');
+const overlayDiv = document.getElementById('overlay');
+const loginForm = document.getElementById('login-form');
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
+
+
+// probably on the server
+let firstDayDate = new Date('2021-10-30T00:00:00');
+const shifts = {
+    '000': {
+        date: null,
+        label: 'C',
+        startTime: '7:45',
+        endTime: '12:15'
+    },
+    '001': {
+        date: null,
+        label: 'D',
+        startTime: '12:30',
+        endTime: '17:00'
+    },
+    '002': {
+        date: null,
+        label: 'F',
+        startTime: '16:45',
+        endTime: '20:00'
+    },
+    '010': {
+        date: null,
+        label: 'C',
+        startTime: '7:45',
+        endTime: '12:15'
+    },
+    '011': {
+        date: null,
+        label: 'D',
+        startTime: '12:30',
+        endTime: '17:00'
+    },
+    '020': {
+        date: null,
+        label: 'B',
+        startTime: '5:15',
+        endTime: '9:30'
+    },
+    '021': {
+        date: null,
+        label: 'M',
+        startTime: '9:15',
+        endTime: '14:30'
+    },
+    '022': {
+        date: null,
+        label: 'E',
+        startTime: '13:45',
+        endTime: '20:00'
+    },
+    '030': {
+        date: null,
+        label: 'B',
+        startTime: '5:15',
+        endTime: '9:30'
+    },
+    '031': {
+        date: null,
+        label: 'M',
+        startTime: '9:15',
+        endTime: '14:30'
+    },
+    '032': {
+        date: null,
+        label: 'E',
+        startTime: '13:45',
+        endTime: '20:00'
+    },
+    '040': {
+        date: null,
+        label: 'B',
+        startTime: '5:15',
+        endTime: '9:30'
+    },
+    '041': {
+        date: null,
+        label: 'M',
+        startTime: '9:15',
+        endTime: '14:30'
+    },
+    '042': {
+        date: null,
+        label: 'E',
+        startTime: '13:45',
+        endTime: '20:00'
+    },
+    '050': {
+        date: null,
+        label: 'B',
+        startTime: '5:15',
+        endTime: '9:30'
+    },
+    '051': {
+        date: null,
+        label: 'M',
+        startTime: '9:15',
+        endTime: '14:30'
+    },
+    '052': {
+        date: null,
+        label: 'E',
+        startTime: '13:45',
+        endTime: '20:00'
+    },
+    '060': {
+        date: null,
+        label: 'B',
+        startTime: '5:15',
+        endTime: '9:30'
+    },
+    '061': {
+        date: null,
+        label: 'M',
+        startTime: '9:15',
+        endTime: '14:30'
+    },
+    '062': {
+        date: null,
+        label: 'E',
+        startTime: '13:45',
+        endTime: '20:00'
+    },
+    '100': {
+        date: null,
+        label: 'C',
+        startTime: '7:45',
+        endTime: '12:15'
+    },
+    '101': {
+        date: null,
+        label: 'D',
+        startTime: '12:30',
+        endTime: '17:00'
+    },
+    '102': {
+        date: null,
+        label: 'F',
+        startTime: '16:45',
+        endTime: '20:00'
+    },
+    '110': {
+        date: null,
+        label: 'C',
+        startTime: '7:45',
+        endTime: '12:15'
+    },
+    '111': {
+        date: null,
+        label: 'D',
+        startTime: '12:30',
+        endTime: '17:00'
+    },
+    '120': {
+        date: null,
+        label: 'B',
+        startTime: '5:15',
+        endTime: '9:30'
+    },
+    '121': {
+        date: null,
+        label: 'M',
+        startTime: '9:15',
+        endTime: '14:30'
+    },
+    '122': {
+        date: null,
+        label: 'E',
+        startTime: '13:45',
+        endTime: '20:00'
+    },
+    '130': {
+        date: null,
+        label: 'B',
+        startTime: '5:15',
+        endTime: '9:30'
+    },
+    '131': {
+        date: null,
+        label: 'M',
+        startTime: '9:15',
+        endTime: '14:30'
+    },
+    '132': {
+        date: null,
+        label: 'E',
+        startTime: '13:45',
+        endTime: '20:00'
+    },
+    '140': {
+        date: null,
+        label: 'B',
+        startTime: '5:15',
+        endTime: '9:30'
+    },
+    '141': {
+        date: null,
+        label: 'M',
+        startTime: '9:15',
+        endTime: '14:30'
+    },
+    '142': {
+        date: null,
+        label: 'E',
+        startTime: '13:45',
+        endTime: '20:00'
+    },
+    '150': {
+        date: null,
+        label: 'B',
+        startTime: '5:15',
+        endTime: '9:30'
+    },
+    '151': {
+        date: null,
+        label: 'M',
+        startTime: '9:15',
+        endTime: '14:30'
+    },
+    '152': {
+        date: null,
+        label: 'E',
+        startTime: '13:45',
+        endTime: '20:00'
+    },
+    '160': {
+        date: null,
+        label: 'B',
+        startTime: '5:15',
+        endTime: '9:30'
+    },
+    '161': {
+        date: null,
+        label: 'M',
+        startTime: '9:15',
+        endTime: '14:30'
+    },
+    '162': {
+        date: null,
+        label: 'E',
+        startTime: '13:45',
+        endTime: '20:00'
+    }
+}
+for (let i in shifts) {
+    i.split('');
+    shifts[i].date = new Date(firstDayDate.getTime() + ((24*60*60*1000) * (i[0]*7 + i[1])));
+}
 
 let userID = localStorage.getItem('userID') || null;
 let minor = 2;
+let finalAvailability = {};
 let lastPreferred = ['001', '032', '062'];
 let lastAvailability = ['001', '002', '011', '032', '052', '062'];
 
 if (userID) {
-    document.querySelector(`#name > option[value="${userID}"]`).selected = true;
-    nameSelectSubmit.classList.remove('pure-button-disabled');
+    usernameInput.value = userID;
     navLinks[5].classList.remove('pure-menu-disabled');
 }
 
-nameSelectBox.addEventListener('change', () => {
-    nameSelectSubmit.classList.remove('pure-button-disabled');
-    navLinks[5].classList.remove('pure-menu-disabled');
-});
-
-nameSelectForm.addEventListener('submit', (evt) => {
+loginForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    userID = nameSelectBox.value;
+    userID = usernameInput.value;
     localStorage.setItem('userID', userID);
+    navLinks[5].classList.remove('pure-menu-disabled');
 
-    displayOverlay();
+    hideOverlay();
 
     return false;
 });
@@ -56,19 +302,18 @@ function hideOverlay() {
 }
 
 document.getElementById('view-schedule').addEventListener('click', () => {
-    hideOverlay();
+    // todo schedule view
 });
 
 document.getElementById('edit-0').addEventListener('click', () => {
-    hideOverlay();
     setTimeout(() => {
         navLinks[0].classList.remove('pure-menu-selected');
         navLinks[1].classList.remove('pure-menu-disabled');
         navLinks[1].classList.add('pure-menu-selected');
-        nameSelectDiv.style.opacity = 0;
+        selectDiv.style.opacity = 0;
         shiftSelectDiv.style.opacity = 0;
         setTimeout(() => {
-            nameSelectDiv.style.display = 'none';
+            selectDiv.style.display = 'none';
             shiftSelectDiv.style.display = 'block';
             setTimeout(() => { shiftSelectDiv.style.opacity = 1; }, 50);
         }, 400);
@@ -221,8 +466,24 @@ continueButton.addEventListener('click', () => {
 });
 
 const submitSelectDiv = document.getElementById('final-submit');
+const finalReviewTable = document.getElementById('shift-review-body');
 
 document.getElementById('hours-submit').addEventListener('click', () => {
+    getFinalAvailability();
+
+    let tableInsert = '';
+    for (let n in finalAvailability) {
+        let i = finalAvailability[n];
+        tableInsert += `<tr>
+        <td>${i.date.getMonth()+1}/${i.date.getDate()}</td>
+        <td>${i.date.getDay()}</td>
+        <td>${i.label}</td>
+        <td>${i.startTime}-${i.endTime}</td>
+        <td>${(i.preferred) ? 'Preferred':'Available'}</td>
+        </tr>`;
+    }
+    finalReviewTable.innerHTML = tableInsert;
+
     navLinks[3].classList.remove('pure-menu-selected');
     navLinks[4].classList.remove('pure-menu-disabled');
     navLinks[4].classList.add('pure-menu-selected');
@@ -234,3 +495,16 @@ document.getElementById('hours-submit').addEventListener('click', () => {
         setTimeout(() => { submitSelectDiv.style.opacity = 1; }, 50);
     }, 400);
 });
+
+function getFinalAvailability() {
+    for (let i of selectedAbleShifts) {
+        finalAvailability[i] = shifts[i];
+        finalAvailability[i].available = true;
+        finalAvailability[i].preferred = false;
+    }
+    for (let i of selectedWantShifts) {
+        finalAvailability[i] = shifts[i];
+        finalAvailability[i].available = true;
+        finalAvailability[i].preferred = true;
+    }
+}

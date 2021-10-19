@@ -79,6 +79,14 @@
     color: #cccccc;
 }
 
+#signin > div {
+    margin-bottom: 30px;
+}
+
+.schedule-status {
+    margin-top: -10px;
+}
+
 .overlay {
     position: absolute;
     top: 0;
@@ -96,6 +104,14 @@
     margin: 0 25vw;
     background-color: white;
     text-align: center;
+}
+
+#login-form input {
+    margin: .25em auto;
+}
+
+#login-form .pure-button {
+    margin: .25em auto 0 auto;
 }
 
 .blur {

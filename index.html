@@ -10,11 +10,11 @@
 <body>
 
     <div id="layout">
-        <div class="pure-menu custom-restricted-width fade" id="menu">
+        <div class="pure-menu custom-restricted-width fade blur" id="menu">
             <span class="pure-menu-heading">Scheduling</span>
             <ul class="pure-menu-list" id="nav-links">
                 <li class="pure-menu-item pure-menu-selected" id="nav-signin">
-                    <a href="#" class="pure-menu-link">Sign in</a>
+                    <a href="#" class="pure-menu-link">Schedule Periods</a>
                 </li>
                 <li class="pure-menu-item pure-menu-disabled" id="nav-preferred">
                     <a href="#" class="pure-menu-link">Preferred Shifts</a>
@@ -37,60 +37,82 @@
             </ul>
         </div>
 
-        <div class="overlay fade" style="display: none;" id="overlay">
-            <div class="pure-g overlay-card">
-                <div class="pure-u-1-3 pure-u-md-1">
-                    <h3>10/2 - 10/15</h3>
-                    <div class="schedule-status">Schedule<br>Released</div>
-                    <a href="#" class="pure-button pure-button-primary" id="view-schedule">View</a>
-                </div>
-                <div class="pure-u-1-3 pure-u-md-1">
-                    <h3>10/16 - 10/29</h3>
-                    <div class="schedule-status">Due 10/7<br>Submitted</div>
-                    <a href="#" class="pure-button pure-button-primary" id="edit-0">Edit</a>
-                </div>
-                <div class="pure-u-1-3 pure-u-md-1">
-                    <h3>10/30 - 11/12</h3>
-                    <div class="schedule-status">Due 10/21<br>Incomplete</div>
-                    <a href="#" class="pure-button pure-button-primary" id="edit-1">Start</a>
-                </div>
-                <div class="pure-u-1" style="margin-top: 15px">If you do not submit your availability on time, your last
-                    availability will be used</div>
+        <div class="overlay fade" id="overlay">
+            <div class="overlay-card">
+                <h3>Sign in</h3>
+                <form class="pure-form pure-form-stacked" id="login-form">
+                    <fieldset>
+                        <div class="pure-control-group">
+                            <input type="text" id="username" placeholder="Username" />
+                        </div>
+                        <div class="pure-control-group">
+                            <input type="password" id="password" placeholder="Password" />
+                        </div>
+                        <div class="pure-controls">
+                            <button type="submit" class="pure-button pure-button-primary" id="login-form-button">Login</button>
+                        </div>
+                    </fieldset>
+                </form>
+                <!--
+                <form class="pure-form" id="name-select">
+                    <fieldset>
+                        <div class="pure-control-group">
+                            <select id="name" class="pure-input">
+                                <option disabled selected value></option>
+                                <option value="162924">Deol, Arnav</option>
+                                <option value="162990">Franklin, Ellie</option>
+                                <option value="162989">Gatzemeyer, Kiera</option>
+                                <option value="162531">Griesmann, Ryan</option>
+                                <option value="162530">Halucha, Holden</option>
+                                <option value="163001">Harvey, Bret</option>
+                                <option value="162956">Koweck, Ella</option>
+                                <option value="162563">Lattin, Jack</option>
+                                <option value="162967">Newkhold, Katerina</option>
+                                <option value="162998">Pearson, Gianna</option>
+                                <option value="162529">Resh, Alden</option>
+                                <option value="162884">Sabaj, Noah</option>
+                                <option value="162999">Zanner, Stephanie</option>
+                                <option value="162997">Zhai, Rachel</option>
+                            </select>
+                        </div>
+                        <div class="pure-control-group">
+                            <button type="submit" id="name-submit"
+                                class="pure-button pure-button-primary pure-button-disabled">Continue</button>
+                        </div>
+                    </fieldset>
+                </form>
+                -->
             </div>
         </div>
 
-        <div class="pure-g" style="margin-left: 180px; margin-top: 20px;" id="main">
+        <div class="pure-g blur" style="margin-left: 180px; margin-top: 20px;" id="main">
             <div class="pure-u-1-12 pure-u-md-0"></div>
             <div class="pure-u-5-6 pure-u-md-1">
-                <div id="signin" style="margin-top: calc(30vh);" class="fade">
-                    <h1>Select your name</h1>
-                    <form class="pure-form pure-form-aligned" id="name-select">
-                        <fieldset>
-                            <div class="pure-control-group">
-                                <select id="name" class="pure-input">
-                                    <option disabled selected value></option>
-                                    <option value="162924">Deol, Arnav</option>
-                                    <option value="162990">Franklin, Ellie</option>
-                                    <option value="162989">Gatzemeyer, Kiera</option>
-                                    <option value="162531">Griesmann, Ryan</option>
-                                    <option value="162530">Halucha, Holden</option>
-                                    <option value="163001">Harvey, Bret</option>
-                                    <option value="162956">Koweck, Ella</option>
-                                    <option value="162563">Lattin, Jack</option>
-                                    <option value="162967">Newkhold, Katerina</option>
-                                    <option value="162998">Pearson, Gianna</option>
-                                    <option value="162529">Resh, Alden</option>
-                                    <option value="162884">Sabaj, Noah</option>
-                                    <option value="162999">Zanner, Stephanie</option>
-                                    <option value="162997">Zhai, Rachel</option>
-                                </select>
-                            </div>
-                            <div class="pure-control-group">
-                                <button type="submit" id="name-submit"
-                                    class="pure-button pure-button-primary pure-button-disabled">Continue</button>
-                            </div>
-                        </fieldset>
-                    </form>
+                <div id="select-period" style="margin-top: 20vh;" class="fade">
+                    <h1>Select Period</h1>           
+                    <div>
+                        <h3>10/2 - 10/15</h3>
+                        <div class="schedule-status">
+                            <a href="#" class="pure-button pure-button-primary" id="view-schedule">View</a>
+                            Schedule Released
+                        </div>
+                    </div>
+                    <div>
+                        <h3>10/16 - 10/29</h3>
+                        <div class="schedule-status">
+                            <a href="#" class="pure-button pure-button-primary" id="edit-0">Edit</a>
+                            Due 10/7 Submitted
+                        </div>
+                    </div>
+                    <div>
+                        <h3>10/30 - 11/12</h3>
+                        <div class="schedule-status">
+                            <a href="#" class="pure-button pure-button-primary" id="edit-1">Start</a>
+                            Due 10/21 Incomplete
+                        </div>
+                    </div>
+                    <div>If you do not submit your availability on time, your last
+                        availability will be used</div>
                 </div>
                 <div id="preferred" style="display: none;" class="fade">
                     <h2 style="display: inline-block" id="preferred-instructions">First select the shifts you <i>want</i> to work</h2>
@@ -245,7 +267,20 @@
                 </div>
                 <div id="final-submit" style="display: none;" class="fade">
                     <h1>Review your availability before submitting</h1>
-                    like put something here idk
+                    <table class="pure-table">
+                        <thread>
+                            <tr>
+                                <th>Date</th>
+                                <th>Day</th>
+                                <th>Shift</th>
+                                <th>Time</th>
+                                <th>Availability</th>
+                            </tr>
+                        </thread>
+                        <tbody id="shift-review-body">
+
+                        </tbody>
+                    </table>
                     <a id="hours-submit" class="pure-button pure-button-primary" href="#">Submit</a>
                 </div>
             </div>
